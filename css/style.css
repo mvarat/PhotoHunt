@@ -1,0 +1,54 @@
+
+body {
+}
+
+nav {
+  background-color: white;
+  font-family: 'Monoton', cursive;
+  font-size: 40px;
+  text-align: center;
+}
+
+h3 {
+  color: black;
+}
+
+footer {
+  bottom: 0;
+  border: solid black;
+  padding: 1%;
+}
+
+.photo {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.photo-a {
+  position: relative;
+  width:450px;
+  height: 450px;
+  display: inline-block;
+  background-image: url(../images/owla.jpg);
+  background-repeat: no-repeat;
+}
+
+.photo-b {
+  position: relative;
+  width:450px;
+  height: 450px;
+  display: inline-block;
+  background-image: url(../images/owlb.jpg);
+  background-repeat: no-repeat;
+}
+
+.circle {
+  position: absolute;
+  display: hidden;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+}
