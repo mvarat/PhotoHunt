@@ -23,15 +23,26 @@ console.log("welcome to photohunt");
       },
       {
       level: "three",
+      xcoords: [3, 25, 225, 400],
+      ycoords: [185, 65, 250, 408],
+      circleWidth: [80,90,100,50],
+      circleHeight: [80,90,100,50],
+      imageA: "../PHTest/images/tacoa.jpg",
+      imageB: "../PHTest/images/tacob.jpg",
+      timerLength: 15000
+      },
+      {
+      level: "four",
       xcoords: [50, 355, 181, 23],
       ycoords: [336, 198, 332, 13],
       circleWidth: [50,35,30,50],
       circleHeight: [50,35,30,50],
       imageA: "../PHTest/images/miamia.jpg",
       imageB: "../PHTest/images/miamib.jpg",
-      timerLength: 15000
+      timerLength: 13000
       }
     ]
+
   var score;
   var gameLevel = 0;
   var clickCounts = 0;
@@ -66,9 +77,9 @@ console.log("welcome to photohunt");
 
   // When user completes one level, next level begins
   photoHunt.startNextLevel = function(level){
-    photoHunt.clearForNextLevel();
     photoHunt.setImages(level);
     photoHunt.setImageClickHandler();
+    photoHunt.clearForNextLevel();
     photoHunt.generateHiddenSpots(level);
     photoHunt.setTracker();
     photoHunt.setTimer(level);
@@ -95,22 +106,24 @@ photoHunt.updateScore = function(score){
 
 // sets image A and B for specified level
 photoHunt.setImages = function(level){
-  var imageUrlA = photoHunt[level].imageA;
-  var imageUrlB = photoHunt[level].imageB;
-  $('.photo-a').css('background-image', 'url(' + imageUrlA  + ')');
-  $('.photo-b').css("background-image", 'url(' + imageUrlB  + ')');
+  $('.photo-a').css('background-image', 'url(' + photoHunt[level].imageA + ')');
+  $('.photo-b').css("background-image", 'url(' + photoHunt[level].imageB  + ')');
 };
 
 // generates circles with different classes
 photoHunt.generateHiddenSpots = function(level){
-    var $circles = $('.photo').append($('<div class="circle circle-a">').css({"left": photoHunt[level].xcoords[0] , "top": photoHunt[level].ycoords[0], "width": photoHunt[level].circleWidth[0], "height": photoHunt[level].circleHeight[0], }));
-    var $circles = $('.photo').append($('<div class="circle circle-b">').css({"left": photoHunt[level].xcoords[1] , "top": photoHunt[level].ycoords[1], "width": photoHunt[level].circleWidth[1], "height": photoHunt[level].circleHeight[1], }));
-    var $circles = $('.photo').append($('<div class="circle circle-c">').css({"left": photoHunt[level].xcoords[2] , "top": photoHunt[level].ycoords[2], "width": photoHunt[level].circleWidth[2], "height": photoHunt[level].circleHeight[2], }));
-    var $circles = $('.photo').append($('<div class="circle circle-d">').css({"left": photoHunt[level].xcoords[3] , "top": photoHunt[level].ycoords[3], "width": photoHunt[level].circleWidth[3], "height": photoHunt[level].circleHeight[3], }));
-
+    var xcoords = photoHunt[level].xcoords;
+    var ycoords = photoHunt[level].ycoords;
+    var width = photoHunt[level].circleWidth;
+    var height = photoHunt[level].circleHeight;
+    var $circles = $('.photo').append($('<div class="circle circle-a">').css({"left": xcoords[0] , "top": ycoords[0], "width": width[0], "height": height[0] }));
+    var $circles = $('.photo').append($('<div class="circle circle-b">').css({"left": xcoords[1] , "top": ycoords[1], "width": width[1], "height": height[1] }));
+    var $circles = $('.photo').append($('<div class="circle circle-c">').css({"left": xcoords[2] , "top": ycoords[2], "width": width[2], "height": height[2] }));
+    var $circles = $('.photo').append($('<div class="circle circle-d">').css({"left": xcoords[3] , "top": ycoords[3], "width": width[3], "height": height[3] }));
     this.setCircleClickHandler();
 }
 
+// clears the circles for the next level
 photoHunt.clearHiddenSpots = function(level){
     $('.circle').remove();
 }
@@ -130,7 +143,6 @@ photoHunt.setImageClickHandler = function(){
 photoHunt.setCircleClickHandler = function(){
   var scope = this;
   $('.circle-a').click(function(e){
-    console.log("The circle A was clicked!");
     score = score + 100;
     scope.updateScore(score);
     $('.circle-a').css("border", "solid red");
@@ -139,7 +151,6 @@ photoHunt.setCircleClickHandler = function(){
     scope.updateTracker();
   });
   $('.circle-b').click(function(e){
-    console.log("The circle B was clicked!");
     score = score + 100;
     scope.updateScore(score);
     $('.circle-b').css("border", "solid red");
@@ -148,7 +159,6 @@ photoHunt.setCircleClickHandler = function(){
     scope.updateTracker();
   });
   $('.circle-c').click(function(e){
-    console.log("The circle C was clicked!");
     score = score + 100;
     scope.updateScore(score);
     $('.circle-c').css("border", "solid red");
@@ -157,7 +167,6 @@ photoHunt.setCircleClickHandler = function(){
     scope.updateTracker();
   });
   $('.circle-d').click(function(e){
-    console.log("The circle D was clicked!");
     score = score + 100;
     scope.updateScore(score);
     $('.circle-d').css("border", "solid red");
@@ -195,12 +204,17 @@ photoHunt.updateTracker = function(){
     $('.tracker-c').css("background","red");
   }
   else if (correctClickCounts == 4){
+    gameLevel ++;
     this.getTimerPoints();
     $('.tracker').css("background","red");
     $("#timer").circletimer("stop");
-    gameLevel ++;
-    alert("CONGRATS! You completed level " + gameLevel + ".");
-    this.startNextLevel(gameLevel);
+    if (gameLevel === 4){
+      alert(" YOU WON! Your score is " + score + ".");
+    }
+    else {
+      alert("CONGRATS! You completed level " + gameLevel + ". Are you ready for the next level?");
+      this.startNextLevel(gameLevel);
+    }
   }
 }
 
@@ -214,9 +228,14 @@ photoHunt.setTimer = function (level){
     }),
     onUpdate: (function(elapsed) {
       var timeRemaining = timeLength - (Math.round(elapsed));
-//     console.log("Time Remaining: "  + timeRemaining);
+//      console.log("Time Remaining: "  + timeRemaining);
     })
   });
+}
+
+// start the timer for each level
+photoHunt.startTimer = function(){
+  $("#timer").circletimer("start");
 }
 
 // returns time left on timer
@@ -228,10 +247,6 @@ photoHunt.getTimerPoints = function(){
   // });
 }
 
-// start the timer for each level
-photoHunt.startTimer = function(){
-  $("#timer").circletimer("start");
-}
 
 // ********************************
 
