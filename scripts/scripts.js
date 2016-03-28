@@ -91,32 +91,77 @@ photoHunt.getImageA = function(level){
   return imageB;
 };
 
-// generates the circles where the differences are to be clicked
+// // generates the circles where the differences are to be clicked
+// photoHunt.generateHiddenSpots = function(level){
+//   for (var i = 0; i < xcoords.length; i++ ){
+//     var $circles = $('.photo').append($('<div class="circle">').css({"left": xcoords[i] , "top": ycoords[i], "width": circleWidth[i], "height": circleHeight[i], }));
+// //    var $circles = $('.photo').append($('<div class="circle">').css({"left": xcoords[i] , "top": ycoords[i], "width": circleWidth[i], "height": circleHeight[i] }));
+//    }
+//   this.setCircleClickHandler();
+// }
+
+// generates circles with different classes
 photoHunt.generateHiddenSpots = function(level){
-  for (var i = 0; i < xcoords.length; i++ ){
-    var $circles = $('.photo-a').append($('<div class="circle">').css({"left": xcoords[i] , "top": ycoords[i], "width": circleWidth[i], "height": circleHeight[i], }));
-    var $circles = $('.photo-b').append($('<div class="circle">').css({"left": xcoords[i] , "top": ycoords[i], "width": circleWidth[i], "height": circleHeight[i] }));
-   }
-  this.setCircleClickHandler();
+    var $circles = $('.photo').append($('<div class="circle circle-a">').css({"left": xcoords[0] , "top": ycoords[0], "width": circleWidth[0], "height": circleHeight[0], }));
+    var $circles = $('.photo').append($('<div class="circle circle-b">').css({"left": xcoords[1] , "top": ycoords[1], "width": circleWidth[1], "height": circleHeight[1], }));
+    var $circles = $('.photo').append($('<div class="circle circle-c">').css({"left": xcoords[2] , "top": ycoords[2], "width": circleWidth[2], "height": circleHeight[2], }));
+    var $circles = $('.photo').append($('<div class="circle circle-d">').css({"left": xcoords[3] , "top": ycoords[3], "width": circleWidth[3], "height": circleHeight[3], }));
+
+    this.setCircleClickHandler();
 }
+
 
 // allows image to be clicked, increase the number of click counts for each click
 photoHunt.setImageClickHandler = function(){
   $('.photo').click(function(e){
     clickCounts ++;
-    console.log("clicks = " + clickCounts);
+    console.log("Total Clicks = " + clickCounts + ", Correct Clicks = " + correctClickCounts);
+    // if total clicks > correct clicks, decrease time on timer!!!!!
   });
 };
 
 // when a difference is clicked, circle in red
   // score is upated by 100 points and
+  // the difference on other image is circled and it can no longer be clicked
 photoHunt.setCircleClickHandler = function(){
   var scope = this;
-  $('.circle').click(function(e){
-    console.log("The circle was clicked!");
+  $('.circle-a').click(function(e){
+    console.log("The circle A was clicked!");
     score = score + 100;
     scope.updateScore(score);
-    $(this).css("border", "solid red");
+    $('.circle-a').css("border", "solid red");
+    $('.circle-a').off('click');
+    correctClickCounts ++;
+    console.log("correct clicks = " + correctClickCounts);
+    scope.updateTracker();
+  });
+
+  $('.circle-b').click(function(e){
+    console.log("The circle B was clicked!");
+    score = score + 100;
+    scope.updateScore(score);
+    $('.circle-b').css("border", "solid red");
+    $('.circle-b').off('click');
+    correctClickCounts ++;
+    console.log("correct clicks = " + correctClickCounts);
+    scope.updateTracker();
+  });
+  $('.circle-c').click(function(e){
+    console.log("The circle C was clicked!");
+    score = score + 100;
+    scope.updateScore(score);
+    $('.circle-c').css("border", "solid red");
+    $('.circle-c').off('click');
+    correctClickCounts ++;
+    console.log("correct clicks = " + correctClickCounts);
+    scope.updateTracker();
+  });
+  $('.circle-d').click(function(e){
+    console.log("The circle D was clicked!");
+    score = score + 100;
+    scope.updateScore(score);
+    $('.circle-d').css("border", "solid red");
+    $('.circle-d').off('click');
     correctClickCounts ++;
     console.log("correct clicks = " + correctClickCounts);
     scope.updateTracker();
@@ -146,6 +191,7 @@ photoHunt.updateTracker = function(){
     $('.tracker-c').css("background","red");
   }
   else if (correctClickCounts == 4){
+    this.getTimerPoints();
     $('.tracker').css("background","red");
     $("#timer").circletimer("stop");
     alert("CONGRATS! You completed level " + gameLevel + ".");
@@ -161,26 +207,20 @@ photoHunt.setTimer = function (){
     onComplete: (function() {
       alert("Time is up!  You LOSE.")
     }),
-     onUpdate: (function(elapsed) {
-       var timeRemaining = 20000 - (Math.round(elapsed));
-       console.log("Time Remaining: "  + timeRemaining);
-     })
+    //  onUpdate: (function(elapsed) {
+    //    var timeRemaining = 20000 - (Math.round(elapsed));
+    //    console.log("Time Remaining: "  + timeRemaining);
+    //  })
   });
 }
-// // returns time left on timer
-// photoHunt.getTimerPoints = function(){
-//   $("#timer").circletimer({
-//      onStop: (function(elapsed) {
-//         console.log(Math.round(elapsed));
-//     })
-//   });
-// }
 
-// when level is complete, gets the remaining time left on timer and adds it to the score, then clears timer.
-photoHunt.getRemainingTime = function (){
-  var timeLeft =  $("#time-elapsed").html(Math.round(elapsed));
-  console.log("Time Left: " + timeleft);
-  score = score + timeLeft;
+// returns time left on timer
+photoHunt.getTimerPoints = function(){
+  $("#timer").circletimer({
+     onUpdate: (function(elapsed) {
+       console.log("Time elapsed: " + (Math.round(elapsed)));
+    })
+  });
 }
 
 // start the timer for each level
