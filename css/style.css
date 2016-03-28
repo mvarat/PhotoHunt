@@ -5,7 +5,7 @@ body {
 nav {
   background-color: white;
   font-family: 'Monoton', cursive;
-  font-size: 40px;
+  font-size: 45px;
   text-align: center;
 }
 
@@ -15,14 +15,18 @@ h3 {
 
 footer {
   bottom: 0;
-  border: solid black;
   padding: 1%;
 }
 
 .photo {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5px;
   text-align: center;
+  border: solid black;
+
+}
+.container {
+  text-align: center;
+  margin: auto;
 }
 
 .photo-a {
@@ -30,8 +34,7 @@ footer {
   width:450px;
   height: 450px;
   display: inline-block;
-  background-image: url(../images/owla.jpg);
-  background-repeat: no-repeat;
+  background-color: black;
 }
 
 .photo-b {
@@ -39,16 +42,49 @@ footer {
   width:450px;
   height: 450px;
   display: inline-block;
-  background-image: url(../images/owlb.jpg);
-  background-repeat: no-repeat;
+  background-color: black;
 }
 
 .circle {
   position: absolute;
   display: hidden;
-  position: absolute;
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
 
+.tracker-container{
+  margin-left: 44%;
+  margin-top: -8%;
+}
+
+.tracker {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.start-screen{
+  margin-top: 50%;
+  font: black;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.start-button{
+  padding: 2%;
+  background-color: black;
+  font: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+
+#score {
+  font-family: sans-serif;
+  font-size: 26px;
+  float: right;
+  margin-top: -5%;
+  margin-right: 15%;
 }
