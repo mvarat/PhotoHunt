@@ -7,15 +7,44 @@ nav {
   font-family: 'Monoton', cursive;
   font-size: 45px;
   text-align: center;
+  visibility: hidden;
+}
+
+h6 {
+  font-family: 'Monoton', cursive;
+  font-size: 45px;
+  text-align: center;
 }
 
 h3 {
+  text-align: center;
+  font-family: sans-serif;
   color: black;
+  font-size: 30px;
+}
+
+h2 {
+  text-align: center;
+  font-family: sans-serif;
+  color: black;
+  font-size: 40px;
 }
 
 footer {
+  visibility: hidden;
   bottom: 0;
   padding: 1%;
+}
+
+#start-screen{
+  padding-top: 10%;
+  font-family: 'Monoton', cursive;
+  font-size: 55px;
+  text-align: center;
+  visibility: visible;
+  width:100%;
+  height: 100%;
+  background-color: white;
 }
 
 .photo {
@@ -25,6 +54,7 @@ footer {
 
 }
 .container {
+  visibility: hidden;
   text-align: center;
   margin: auto;
 }
