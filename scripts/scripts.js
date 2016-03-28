@@ -1,7 +1,7 @@
 console.log("welcome to photohunt");
 
   var photoHunt = {
-    // {
+    // {1:
     //   "level": "one",
     //   "xcoords": [100, 420, 170, 230],
     //   "ycoords": [380, 195, 275, 139],
@@ -12,7 +12,7 @@ console.log("welcome to photohunt");
     //   "timerLength": 20000;
     // }
     //
-    // {
+    // {2:
     //   "level": "two",
     //   "xcoords": [[82, 303, 230, 210],
     //   "ycoords": [258, 236, 255, 142],
@@ -147,10 +147,10 @@ photoHunt.updateTracker = function(){
   }
   else if (correctClickCounts == 4){
     $('.tracker').css("background","red");
+    $("#timer").circletimer("stop");
     alert("CONGRATS! You completed level " + gameLevel + ".");
     gameLevel ++;
     console.log("New Game Level: " + gameLevel);
-    $("#timer").circletimer("stop");
   }
 }
 
@@ -161,9 +161,20 @@ photoHunt.setTimer = function (){
     onComplete: (function() {
       alert("Time is up!  You LOSE.")
     }),
-    onUpdate: (function() {})
+     onUpdate: (function(elapsed) {
+       var timeRemaining = 20000 - (Math.round(elapsed));
+       console.log("Time Remaining: "  + timeRemaining);
+     })
   });
 }
+// // returns time left on timer
+// photoHunt.getTimerPoints = function(){
+//   $("#timer").circletimer({
+//      onStop: (function(elapsed) {
+//         console.log(Math.round(elapsed));
+//     })
+//   });
+// }
 
 // when level is complete, gets the remaining time left on timer and adds it to the score, then clears timer.
 photoHunt.getRemainingTime = function (){
