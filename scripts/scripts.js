@@ -52,10 +52,8 @@ console.log("welcome to photohunt");
   photoHunt.initGame = function(){
     var scope = this;
     $('#start-screen').click(function(e){
-      console.log("Let the game begin!");
       scope.startGame(0);
     });
-
   }
 
   // When user is ready, the game begins
@@ -74,11 +72,9 @@ console.log("welcome to photohunt");
     photoHunt.startTimer();
   }
 
-
   // When user completes one level, next level begins
   photoHunt.startNextLevel = function(level){
     photoHunt.setImages(level);
-    photoHunt.setImageClickHandler();
     photoHunt.clearForNextLevel();
     photoHunt.generateHiddenSpots(level);
     photoHunt.setTracker();
@@ -130,10 +126,15 @@ photoHunt.clearHiddenSpots = function(level){
 
 // allows image to be clicked, increase the number of click counts for each click
 photoHunt.setImageClickHandler = function(){
+  var scope = this;
+  var clickDifference;
   $('.photo').click(function(e){
     clickCounts ++;
+    clickDifference = clickCounts -
     console.log("Total Clicks = " + clickCounts + ", Correct Clicks = " + correctClickCounts);
     // if total clicks > correct clicks, decrease time on timer!!!!!
+  //  if
+
   });
 };
 
@@ -225,6 +226,7 @@ photoHunt.setTimer = function (level){
     timeout: timeLength,
     onComplete: (function() {
       alert("Time is up!  You LOSE.")
+  //    photoHunt.initGame();
     }),
     onUpdate: (function(elapsed) {
       var timeRemaining = timeLength - (Math.round(elapsed));
