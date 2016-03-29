@@ -47,6 +47,7 @@ console.log("welcome to photohunt");
   var gameLevel = 0;
   var clickCounts = 0;
   var correctClickCounts = 0;
+  var clickDifference = 0;
 
   // Initialize the Game
   photoHunt.initGame = function(){
@@ -89,6 +90,7 @@ console.log("welcome to photohunt");
     photoHunt.clearHiddenSpots();
     clickCounts = 0;
     correctClickCounts = 0;
+    clickDifference = 0;
   }
 
 // sets the score to 0
@@ -135,17 +137,19 @@ photoHunt.clearHiddenSpots = function(level){
 // allows image to be clicked, increase the number of click counts for each click
 photoHunt.setImageClickHandler = function(){
   var scope = this;
-  var clickDifference;
   $('.photo').click(function(e){
-    clickCounts ++;
-    clickDifference = clickCounts -
-    console.log("Total Clicks = " + clickCounts + ", Correct Clicks = " + correctClickCounts);
-    // if total clicks > correct clicks, decrease time on timer!!!!!
-
+    clickCounts++;
+    incorrectClick = clickCounts - correctClickCounts; // is 0 if click was correct, is 1 if click was incorrect
+    // if image was clicked but it was not a difference, decrease score by 15
+    if (incorrectClick != 0){
+      score = score - 15;
+      scope.updateScore(score);
+      clickCounts --;
+    }
   });
 };
 
-// when a difference is clicked, circle in red
+// when a difference is clicked, circle in blue
   // score is upated by 100 points
   // the difference on other image is circled and it can no longer be clicked
 photoHunt.setCircleClickHandler = function(){
@@ -153,7 +157,7 @@ photoHunt.setCircleClickHandler = function(){
   $('.circle-a').click(function(e){
     score = score + 100;
     scope.updateScore(score);
-    $('.circle-a').css("border", "solid red");
+    $('.circle-a').css("border", "solid #32d0ec");
     $('.circle-a').off('click');
     correctClickCounts ++;
     scope.updateTracker();
@@ -161,7 +165,7 @@ photoHunt.setCircleClickHandler = function(){
   $('.circle-b').click(function(e){
     score = score + 100;
     scope.updateScore(score);
-    $('.circle-b').css("border", "solid red");
+    $('.circle-b').css("border", "solid #32d0ec");
     $('.circle-b').off('click');
     correctClickCounts ++;
     scope.updateTracker();
@@ -169,7 +173,7 @@ photoHunt.setCircleClickHandler = function(){
   $('.circle-c').click(function(e){
     score = score + 100;
     scope.updateScore(score);
-    $('.circle-c').css("border", "solid red");
+    $('.circle-c').css("border", "solid #32d0ec");
     $('.circle-c').off('click');
     correctClickCounts ++;
     scope.updateTracker();
@@ -177,7 +181,7 @@ photoHunt.setCircleClickHandler = function(){
   $('.circle-d').click(function(e){
     score = score + 100;
     scope.updateScore(score);
-    $('.circle-d').css("border", "solid red");
+    $('.circle-d').css("border", "solid #32d0ec");
     $('.circle-d').off('click');
     correctClickCounts ++;
     scope.updateTracker();
@@ -187,10 +191,10 @@ photoHunt.setCircleClickHandler = function(){
 // set tracker in footer
 photoHunt.setTracker = function(){
     console.log("tracker is set.");
-     $('.tracker-a').css("border", "solid #F3F315");
-     $('.tracker-b').css("border","solid #F433FF");
-     $('.tracker-c').css("border","solid #7c32ec");
-     $('.tracker-d').css("border","solid #32d0ec");
+     $('.tracker-a').css("border","solid #F3F315");  // creates yellow tracker
+     $('.tracker-b').css("border","solid #32d0ec");   // creates blue tracker
+     $('.tracker-c').css("border","solid #7c32ec");   // creates purple tracker
+     $('.tracker-d').css("border","solid #F433FF");   // creates pink tracker
 }
 
 // clear tracker in footer
@@ -201,24 +205,21 @@ photoHunt.clearTracker = function(){
 // updates tracker in footer
 photoHunt.updateTracker = function(){
   var scope = this;
-  if (correctClickCounts == 0){
+  if (correctClickCounts < 1){
     $('.tracker').css("background","white");
   }
-  else if (correctClickCounts == 1){
-    $('.tracker-a').css("background","black");
+  else if (correctClickCounts < 2){
+    $('.tracker-a').css("background","#F3F315");
   }
-  else if (correctClickCounts == 2){
-    $('.tracker-a').css("background","black");
-    $('.tracker-b').css("background","black");
+  else if (correctClickCounts < 3){
+    $('.tracker-b').css("background","#32d0ec");
   }
-  else if (correctClickCounts == 3){
-    $('.tracker-a').css("background","red");
-    $('.tracker-b').css("background","red");
-    $('.tracker-c').css("background","red");
+  else if (correctClickCounts < 4){
+    $('.tracker-c').css("background","#7c32ec");
   }
   else if (correctClickCounts == 4){
     gameLevel ++;
-    $('.tracker').css("background","red");
+    $('.tracker-d').css("background","#F433FF");
     $("#timer").circletimer("stop");
     if (gameLevel === 4){
       swal("YOU WON!", "Your score is " + score + ".");
