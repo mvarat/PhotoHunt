@@ -7,8 +7,8 @@ console.log("welcome to photohunt");
       ycoords: [375, 190, 265, 139],
       circleWidth: [40,40,70,40],
       circleHeight: [40,40,70,40],
-      imageA: "../PHTest/images/owla.jpg",
-      imageB: "../PHTest/images/owlb.jpg",
+      imageA: "../PhotoHunt/images/owla.jpg",
+      imageB: "../PhotoHunt/images/owlb.jpg",
       timerLength: 20000
       },
       {
@@ -17,8 +17,8 @@ console.log("welcome to photohunt");
       ycoords: [258, 236, 255, 142],
       circleWidth: [30,30,30,40],
       circleHeight: [30,30,30,40],
-      imageA: "../PHTest/images/generalassemblya.jpg",
-      imageB: "../PHTest/images/generalassemblyb.jpg",
+      imageA: "../PhotoHunt/images/generalassemblya.jpg",
+      imageB: "../PhotoHunt/images/generalassemblyb.jpg",
       timerLength: 17000
       },
       {
@@ -27,8 +27,8 @@ console.log("welcome to photohunt");
       ycoords: [185, 65, 250, 408],
       circleWidth: [80,90,100,50],
       circleHeight: [80,90,100,50],
-      imageA: "../PHTest/images/tacoa.jpg",
-      imageB: "../PHTest/images/tacob.jpg",
+      imageA: "../PhotoHunt/images/tacoa.jpg",
+      imageB: "../PhotoHunt/images/tacob.jpg",
       timerLength: 15000
       },
       {
@@ -37,8 +37,8 @@ console.log("welcome to photohunt");
       ycoords: [336, 198, 332, 13],
       circleWidth: [50,35,30,50],
       circleHeight: [50,35,30,50],
-      imageA: "../PHTest/images/miamia.jpg",
-      imageB: "../PHTest/images/miamib.jpg",
+      imageA: "../PhotoHunt/images/miamia.jpg",
+      imageB: "../PhotoHunt/images/miamib.jpg",
       timerLength: 13000
       }
     ]
@@ -70,6 +70,7 @@ console.log("welcome to photohunt");
     photoHunt.setTracker();
     photoHunt.setTimer(level);
     photoHunt.startTimer();
+    photoHunt.setLevel(level);
   }
 
   // When user completes one level, next level begins
@@ -80,6 +81,7 @@ console.log("welcome to photohunt");
     photoHunt.setTracker();
     photoHunt.setTimer(level);
     photoHunt.startTimer();
+    photoHunt.setLevel(level);
   }
 
   photoHunt.clearForNextLevel = function(){
@@ -98,6 +100,12 @@ photoHunt.setScore = function(){
 // updates the score in the footer
 photoHunt.updateScore = function(score){
   $('#score').text("Score: " + score);
+};
+
+// updates the level in the footer
+photoHunt.setLevel = function(level){
+  var displayLevel = level + 1;
+  $('#level').text("Level: " + displayLevel);
 };
 
 // sets image A and B for specified level
@@ -178,7 +186,11 @@ photoHunt.setCircleClickHandler = function(){
 
 // set tracker in footer
 photoHunt.setTracker = function(){
-    $('.tracker').css("border","solid red");
+    console.log("tracker is set.");
+     $('.tracker-a').css("border", "solid #F3F315");
+     $('.tracker-b').css("border","solid #F433FF");
+     $('.tracker-c').css("border","solid #7c32ec");
+     $('.tracker-d').css("border","solid #32d0ec");
 }
 
 // clear tracker in footer
@@ -193,11 +205,11 @@ photoHunt.updateTracker = function(){
     $('.tracker').css("background","white");
   }
   else if (correctClickCounts == 1){
-    $('.tracker-a').css("background","red");
+    $('.tracker-a').css("background","black");
   }
   else if (correctClickCounts == 2){
-    $('.tracker-a').css("background","red");
-    $('.tracker-b').css("background","red");
+    $('.tracker-a').css("background","black");
+    $('.tracker-b').css("background","black");
   }
   else if (correctClickCounts == 3){
     $('.tracker-a').css("background","red");
@@ -230,7 +242,7 @@ photoHunt.setTimer = function (level){
       swal({
         title: "Time is up...",
         text: "Do you want to try again?",
-      }, function(){  photoHunt.initGame();
+      }, function(){  window.location.reload();
                    });
     }),
     onUpdate: (function(elapsed) {

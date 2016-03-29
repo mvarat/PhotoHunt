@@ -17,13 +17,16 @@ h3 {
   font-family: sans-serif;
   color: black;
   font-size: 30px;
+  padding-bottom: 5%;
 }
 
 h2 {
   text-align: center;
   font-family: sans-serif;
   color: black;
-  font-size: 40px;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-bottom: -10px;
 }
 
 #start-screen {
@@ -36,6 +39,7 @@ h2 {
   width:100%;
   height: 100%;
   background-color: white;
+  cursor: pointer;
 }
 
 .container {
@@ -48,7 +52,7 @@ h2 {
   margin: 5px;
   text-align: center;
   border: solid black;
-
+  cursor: pointer;
 }
 
 .photo-a {
@@ -113,6 +117,13 @@ footer {
 }
 
 #score {
+  font-family: sans-serif;
+  font-size: 26px;
+  font-weight: bolder;
+  text-align: right;
+}
+
+#level {
   font-family: sans-serif;
   font-size: 26px;
   font-weight: bolder;

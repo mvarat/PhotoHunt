@@ -12,7 +12,7 @@
 
 #ct-circle-container svg circle{
   fill:none;
-  stroke: red;
+  stroke: black;
   stroke-dashoffset:0;
   stroke-width:50%;
 }
