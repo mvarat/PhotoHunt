@@ -3,10 +3,10 @@ console.log("welcome to photohunt");
   var photoHunt = [
       {
       level: "one",
-      xcoords: [100, 420, 170, 230],
-      ycoords: [380, 195, 275, 139],
-      circleWidth: [30,30,50,40],
-      circleHeight: [30,30,50,40],
+      xcoords: [92, 410, 160, 230],
+      ycoords: [375, 190, 265, 139],
+      circleWidth: [40,40,70,40],
+      circleHeight: [40,40,70,40],
       imageA: "../PHTest/images/owla.jpg",
       imageB: "../PHTest/images/owlb.jpg",
       timerLength: 20000
@@ -133,7 +133,6 @@ photoHunt.setImageClickHandler = function(){
     clickDifference = clickCounts -
     console.log("Total Clicks = " + clickCounts + ", Correct Clicks = " + correctClickCounts);
     // if total clicks > correct clicks, decrease time on timer!!!!!
-  //  if
 
   });
 };
@@ -189,6 +188,7 @@ photoHunt.clearTracker = function(){
 
 // updates tracker in footer
 photoHunt.updateTracker = function(){
+  var scope = this;
   if (correctClickCounts == 0){
     $('.tracker').css("background","white");
   }
@@ -206,15 +206,17 @@ photoHunt.updateTracker = function(){
   }
   else if (correctClickCounts == 4){
     gameLevel ++;
-    this.getTimerPoints();
     $('.tracker').css("background","red");
     $("#timer").circletimer("stop");
     if (gameLevel === 4){
-      alert(" YOU WON! Your score is " + score + ".");
+      swal("YOU WON!", "Your score is " + score + ".");
     }
     else {
-      alert("CONGRATS! You completed level " + gameLevel + ". Are you ready for the next level?");
-      this.startNextLevel(gameLevel);
+      swal({
+        title: "CONGRATULATIONS!",
+        text: "You completed LEVEL " + gameLevel + ". Are you ready for the next level?",
+      }, function(){ scope.startNextLevel(gameLevel);
+                  });
     }
   }
 }
@@ -225,8 +227,11 @@ photoHunt.setTimer = function (level){
   $("#timer").circletimer({
     timeout: timeLength,
     onComplete: (function() {
-      alert("Time is up!  You LOSE.")
-  //    photoHunt.initGame();
+      swal({
+        title: "Time is up...",
+        text: "Do you want to try again?",
+      }, function(){  photoHunt.initGame();
+                   });
     }),
     onUpdate: (function(elapsed) {
       var timeRemaining = timeLength - (Math.round(elapsed));

@@ -6,8 +6,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="css/circletimer.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <script src="scripts/scripts.js"></script>
     <script src="scripts/circletimer.min.js"></script>
+    <script src="scripts/sweetalert.min.js"></script>
     <title>Photo Hunt</title>
   </head>
   <body>
@@ -26,14 +28,19 @@
       </div>
     </div>
     <footer>
-      <div id="timer"></div>
-      <div class="tracker-container">
-        <div class="tracker tracker-a"> </div>
-        <div class="tracker tracker-b"> </div>
-        <div class="tracker tracker-c"> </div>
-        <div class="tracker tracker-d"> </div>
+      <div class="timer-container">
+          <div id="timer"></div>
       </div>
-      <div id="score"></div>
+      <div class="tracker-container">
+         FIND 4 DIFFERENCES:<br>
+        <div class="tracker tracker-a"></div>
+        <div class="tracker tracker-b"></div>
+        <div class="tracker tracker-c"></div>
+        <div class="tracker tracker-d"></div>
+      </div>
+      <div class="score-container">
+        <div id="score"></div>
+      </div>
     </footer>
   </body>
 </html>
