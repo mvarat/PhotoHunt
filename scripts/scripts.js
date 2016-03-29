@@ -2,6 +2,16 @@ console.log("welcome to photohunt");
 
   var photoHunt = [
       {
+      level: "three",
+      xcoords: [245, 355, 20, 110],
+      ycoords: [215, 63, 360, 73],
+      circleWidth: [60,50,70,40],
+      circleHeight: [60,50,70,40],
+      imageA: "../PhotoHunt/images/arcadea.jpg",
+      imageB: "../PhotoHunt/images/arcadeb.jpg",
+      timerLength: 20000
+      },
+      {
       level: "one",
       xcoords: [92, 410, 160, 230],
       ycoords: [375, 190, 265, 139],
@@ -48,6 +58,7 @@ console.log("welcome to photohunt");
   var clickCounts = 0;
   var correctClickCounts = 0;
   var clickDifference = 0;
+  var timeRemaining;
 
   // Initialize the Game
   photoHunt.initGame = function(){
@@ -91,6 +102,7 @@ console.log("welcome to photohunt");
     clickCounts = 0;
     correctClickCounts = 0;
     clickDifference = 0;
+    timeRemaining = 0;
   }
 
 // sets the score to 0
@@ -190,8 +202,7 @@ photoHunt.setCircleClickHandler = function(){
 
 // set tracker in footer
 photoHunt.setTracker = function(){
-    console.log("tracker is set.");
-     $('.tracker-a').css("border","solid #F3F315");  // creates yellow tracker
+     $('.tracker-a').css("border","solid #F3F315");   // creates yellow tracker
      $('.tracker-b').css("border","solid #32d0ec");   // creates blue tracker
      $('.tracker-c').css("border","solid #7c32ec");   // creates purple tracker
      $('.tracker-d').css("border","solid #F433FF");   // creates pink tracker
@@ -217,12 +228,19 @@ photoHunt.updateTracker = function(){
   else if (correctClickCounts < 4){
     $('.tracker-c').css("background","#7c32ec");
   }
+  // when all differences have been clicked,
   else if (correctClickCounts == 4){
     gameLevel ++;
     $('.tracker-d').css("background","#F433FF");
-    $("#timer").circletimer("stop");
-    if (gameLevel === 4){
-      swal("YOU WON!", "Your score is " + score + ".");
+    $("#timer").circletimer("pause");
+    score = score + parseInt(timeRemaining/100);  //increase score by remaining time
+    this.updateScore(score);
+    if (gameLevel === 5){
+      swal({
+        title: "YOU WON!",
+        text: "Your score is " + score + ". Do you want to play again?",
+      }, function(){ window.location.reload();
+                  });
     }
     else {
       swal({
@@ -247,8 +265,12 @@ photoHunt.setTimer = function (level){
                    });
     }),
     onUpdate: (function(elapsed) {
-      var timeRemaining = timeLength - (Math.round(elapsed));
-//      console.log("Time Remaining: "  + timeRemaining);
+      timeRemaining = timeLength - (Math.round(elapsed));
+      if ((timeRemaining < 5000) && (timeRemaining > 4980)){
+        console.log("time is running out!");
+      //  setInterval(function(){
+      //    $('#timer').toggleClass('timer-blink-black');}, 500);
+      }
     })
   });
 }
@@ -258,14 +280,6 @@ photoHunt.startTimer = function(){
   $("#timer").circletimer("start");
 }
 
-// returns time left on timer
-photoHunt.getTimerPoints = function(){
-  // $("#timer").circletimer({
-  //    onUpdate: (function(elapsed) {
-  //      console.log("Time elapsed: " + (Math.round(elapsed)));
-  //   })
-  // });
-}
 
 
 // ********************************
