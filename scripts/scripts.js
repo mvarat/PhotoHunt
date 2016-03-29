@@ -2,16 +2,6 @@ console.log("welcome to photohunt");
 
   var photoHunt = [
       {
-      level: "three",
-      xcoords: [245, 355, 20, 110],
-      ycoords: [215, 63, 360, 73],
-      circleWidth: [60,50,70,40],
-      circleHeight: [60,50,70,40],
-      imageA: "../PhotoHunt/images/arcadea.jpg",
-      imageB: "../PhotoHunt/images/arcadeb.jpg",
-      timerLength: 20000
-      },
-      {
       level: "one",
       xcoords: [92, 410, 160, 230],
       ycoords: [375, 190, 265, 139],
@@ -23,33 +13,43 @@ console.log("welcome to photohunt");
       },
       {
       level: "two",
+      xcoords: [245, 355, 20, 110],
+      ycoords: [215, 63, 360, 73],
+      circleWidth: [60,50,70,40],
+      circleHeight: [60,50,70,40],
+      imageA: "../PhotoHunt/images/arcadea.jpg",
+      imageB: "../PhotoHunt/images/arcadeb.jpg",
+      timerLength: 20000
+      },
+      {
+      level: "three",
       xcoords: [82, 303, 230, 210],
       ycoords: [258, 236, 255, 142],
       circleWidth: [30,30,30,40],
       circleHeight: [30,30,30,40],
       imageA: "../PhotoHunt/images/generalassemblya.jpg",
       imageB: "../PhotoHunt/images/generalassemblyb.jpg",
-      timerLength: 17000
+      timerLength: 20000
       },
       {
-      level: "three",
+      level: "four",
       xcoords: [3, 25, 225, 400],
       ycoords: [185, 65, 250, 408],
       circleWidth: [80,90,100,50],
       circleHeight: [80,90,100,50],
       imageA: "../PhotoHunt/images/tacoa.jpg",
       imageB: "../PhotoHunt/images/tacob.jpg",
-      timerLength: 15000
+      timerLength: 20000
       },
       {
-      level: "four",
+      level: "five",
       xcoords: [50, 355, 181, 23],
       ycoords: [336, 198, 332, 13],
       circleWidth: [50,35,30,50],
       circleHeight: [50,35,30,50],
       imageA: "../PhotoHunt/images/miamia.jpg",
       imageB: "../PhotoHunt/images/miamib.jpg",
-      timerLength: 13000
+      timerLength: 20000
       }
     ]
 
@@ -59,6 +59,12 @@ console.log("welcome to photohunt");
   var correctClickCounts = 0;
   var clickDifference = 0;
   var timeRemaining;
+  var hintsLeft = 3;
+
+  var aIsClicked = false;
+  var bIsClicked = false;
+  var cIsClicked = false;
+  var dIsClicked = false;
 
   // Initialize the Game
   photoHunt.initGame = function(){
@@ -83,6 +89,7 @@ console.log("welcome to photohunt");
     photoHunt.setTimer(level);
     photoHunt.startTimer();
     photoHunt.setLevel(level);
+    photoHunt.setHintClickHandler();
   }
 
   // When user completes one level, next level begins
@@ -94,6 +101,7 @@ console.log("welcome to photohunt");
     photoHunt.setTimer(level);
     photoHunt.startTimer();
     photoHunt.setLevel(level);
+    photoHunt.setIsClicked();
   }
 
   photoHunt.clearForNextLevel = function(){
@@ -110,7 +118,6 @@ photoHunt.setScore = function(){
   score = 0;
   this.updateScore(score);
 };
-
 // updates the score in the footer
 photoHunt.updateScore = function(score){
   $('#score').text("Score: " + score);
@@ -121,6 +128,15 @@ photoHunt.setLevel = function(level){
   var displayLevel = level + 1;
   $('#level').text("Level: " + displayLevel);
 };
+
+photoHunt.setIsClicked = function(){
+  console.log("When set is called first, a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
+  var aIsClicked = false;
+  var bIsClicked = false;
+  var cIsClicked = false;
+  var dIsClicked = false;
+  console.log("When set is called after, a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
+}
 
 // sets image A and B for specified level
 photoHunt.setImages = function(level){
@@ -173,6 +189,7 @@ photoHunt.setCircleClickHandler = function(){
     $('.circle-a').off('click');
     correctClickCounts ++;
     scope.updateTracker();
+    aIsClicked = true;
   });
   $('.circle-b').click(function(e){
     score = score + 100;
@@ -181,6 +198,7 @@ photoHunt.setCircleClickHandler = function(){
     $('.circle-b').off('click');
     correctClickCounts ++;
     scope.updateTracker();
+    bIsClicked = true;
   });
   $('.circle-c').click(function(e){
     score = score + 100;
@@ -189,6 +207,7 @@ photoHunt.setCircleClickHandler = function(){
     $('.circle-c').off('click');
     correctClickCounts ++;
     scope.updateTracker();
+    cIsClicked = true;
   });
   $('.circle-d').click(function(e){
     score = score + 100;
@@ -197,6 +216,7 @@ photoHunt.setCircleClickHandler = function(){
     $('.circle-d').off('click');
     correctClickCounts ++;
     scope.updateTracker();
+    dIsClicked = true;
   });
 };
 
@@ -250,6 +270,56 @@ photoHunt.updateTracker = function(){
                   });
     }
   }
+}
+
+// sets up hints in footer (3 per game)
+photoHunt.setHintClickHandler = function(){
+  var scope = this;
+  $('.hint').click(function(e){
+    clickCounts++;
+    correctClickCounts++;
+    if (hintsLeft == 3){
+      $('.hint-c').remove();
+    }
+    else if (hintsLeft == 2){
+      $('.hint-b').remove();
+    }
+    else if (hintsLeft == 1){
+      $('.hint-a').remove();
+    }
+    else if (hintsLeft == 0){
+        $('h5').text("No More Hints");
+      }
+    scope.giveHint();
+    hintsLeft--;
+    console.log("hints left: " + hintsLeft)
+    scope.updateTracker();
+  });
+}
+
+// sets up hints in footer (3 per game)
+photoHunt.giveHint = function(){
+  console.log("a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
+   if (aIsClicked == false){
+      aIsClicked = true;
+      $('.circle-a').css("border", "solid #32d0ec");
+      $('.circle-a').off('click');
+   }
+   else if (bIsClicked == false){
+      bIsClicked = true;
+      $('.circle-b').css("border", "solid #32d0ec");
+      $('.circle-b').off('click');
+   }
+   else if (cIsClicked == false){
+      cIsClicked = true;
+      $('.circle-c').css("border", "solid #32d0ec");
+      $('.circle-c').off('click');
+   }
+   else if (dIsClicked == false){
+      dIsClicked = true;
+      $('.circle-d').css("border", "solid #32d0ec");
+      $('.circle-d').off('click');
+   }
 }
 
 // set the timer for each level

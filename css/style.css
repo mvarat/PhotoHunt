@@ -5,13 +5,14 @@ nav {
   text-align: center;
   visibility: hidden;
 }
-
-h6 {
-  font-family: 'Monoton', cursive;
-  font-size: 45px;
+h2 {
   text-align: center;
+  font-family: sans-serif;
+  color: black;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-bottom: -10px;
 }
-
 h3 {
   text-align: center;
   font-family: sans-serif;
@@ -20,13 +21,13 @@ h3 {
   padding-bottom: 5%;
 }
 
-h2 {
+h5 {
   text-align: center;
   font-family: sans-serif;
+  font-weight: bold;
   color: black;
-  font-size: 20px;
-  font-weight: lighter;
-  margin-bottom: -10px;
+  font-size: 18px;
+  margin:auto;
 }
 
 #start-screen {
@@ -100,6 +101,7 @@ footer {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .tracker-container{
@@ -109,6 +111,15 @@ footer {
   color: black;
   font-size: 18px;
   margin:auto;
+}
+
+.hint {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid black;
+  background-color: black;
 }
 
 .score-container{
