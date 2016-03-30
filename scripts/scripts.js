@@ -34,6 +34,16 @@ console.log("welcome to photohunt");
       },
       {
       level: "four",
+      xcoords: [2, 260, 218, 140],
+      ycoords: [355, 370, 218, 28],
+      circleWidth: [40,50,40,70],
+      circleHeight: [40,50,40,70],
+      imageA: "../PhotoHunt/images/brooklyna.jpg",
+      imageB: "../PhotoHunt/images/brooklynb.jpg",
+      timerLength: 20000
+      },
+      {
+      level: "five",
       xcoords: [78, 298, 225, 205],
       ycoords: [253, 231, 250, 138],
       circleWidth: [40,40,40,50],
@@ -42,8 +52,17 @@ console.log("welcome to photohunt");
       imageB: "../PhotoHunt/images/generalassemblyb.jpg",
       timerLength: 20000
       },
+      level: "six",
+      xcoords: [175, 380, 140, 360],
+      ycoords: [345, 310, 200, 25],
+      circleWidth: [60,60,80,50],
+      circleHeight: [60,60,80,50],
+      imageA: "../PhotoHunt/images/concerta.jpg",
+      imageB: "../PhotoHunt/images/concertb.jpg",
+      timerLength: 20000
+      },
       {
-      level: "five",
+      level: "seven",
       xcoords: [3, 25, 225, 400],
       ycoords: [185, 65, 250, 408],
       circleWidth: [80,90,100,50],
@@ -53,7 +72,7 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "six",
+      level: "eight",
       xcoords: [50, 355, 181, 23],
       ycoords: [336, 198, 332, 13],
       circleWidth: [50,35,30,50],
