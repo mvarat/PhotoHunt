@@ -9,7 +9,7 @@ In each level, the player is shown two photos, side-by-side that are identical e
 The player should be able to:
  1. Start the game at level one.
  2. Click anywhere on both of the images.
- 3. Click on the four differences at each level in gain points and move on to the next level.
+ 3. Click on the four differences on either image for each level in order to gain points and move on to the next level.
  4. Click on available hints when hint is needed.
  5. Play through level 10 if differences are found before time is up on each level.
 
