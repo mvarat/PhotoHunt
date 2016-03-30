@@ -14,6 +14,16 @@ console.log("welcome to photohunt");
       },
       {
       level: "two",
+      xcoords: [45, 330, 150, 245],
+      ycoords: [232, 145, 285, 0],
+      circleWidth: [40,40,80,100],
+      circleHeight: [40,40,80,100],
+      imageA: "../PhotoHunt/images/arta.jpg",
+      imageB: "../PhotoHunt/images/artb.jpg",
+      timerLength: 200000
+      },
+      {
+      level: "three",
       xcoords: [220, 355, 42, 196],
       ycoords: [405, 315, 208, 8],
       circleWidth: [40,80,40,50],
@@ -23,7 +33,7 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "three",
+      level: "four",
       xcoords: [245, 355, 20, 110],
       ycoords: [215, 63, 360, 73],
       circleWidth: [60,50,70,40],
@@ -33,7 +43,7 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "four",
+      level: "five",
       xcoords: [2, 260, 218, 140],
       ycoords: [355, 370, 218, 28],
       circleWidth: [40,50,40,70],
@@ -43,7 +53,7 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "five",
+      level: "six",
       xcoords: [78, 298, 225, 205],
       ycoords: [253, 231, 250, 138],
       circleWidth: [40,40,40,50],
@@ -52,7 +62,18 @@ console.log("welcome to photohunt");
       imageB: "../PhotoHunt/images/generalassemblyb.jpg",
       timerLength: 20000
       },
-      level: "six",
+      {
+      level: "seven",
+      xcoords: [47, 355, 260, 200],
+      ycoords: [240, 405, 295, 40],
+      circleWidth: [40,40,50,50],
+      circleHeight: [40,40,50,50],
+      imageA: "../PhotoHunt/images/crybabya.jpg",
+      imageB: "../PhotoHunt/images/crybabyb.jpg",
+      timerLength: 200000
+      },
+      {
+      level: "eight",
       xcoords: [175, 380, 140, 360],
       ycoords: [345, 310, 200, 25],
       circleWidth: [60,60,80,50],
@@ -62,7 +83,17 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "seven",
+      level: "nine",
+      xcoords: [50, 355, 181, 23],
+      ycoords: [336, 198, 332, 13],
+      circleWidth: [50,35,30,50],
+      circleHeight: [50,35,30,50],
+      imageA: "../PhotoHunt/images/miamia.jpg",
+      imageB: "../PhotoHunt/images/miamib.jpg",
+      timerLength: 20000
+      },
+      {
+      level: "ten",
       xcoords: [3, 25, 225, 400],
       ycoords: [185, 65, 250, 408],
       circleWidth: [80,90,100,50],
@@ -71,16 +102,6 @@ console.log("welcome to photohunt");
       imageB: "../PhotoHunt/images/tacob.jpg",
       timerLength: 20000
       },
-      {
-      level: "eight",
-      xcoords: [50, 355, 181, 23],
-      ycoords: [336, 198, 332, 13],
-      circleWidth: [50,35,30,50],
-      circleHeight: [50,35,30,50],
-      imageA: "../PhotoHunt/images/miamia.jpg",
-      imageB: "../PhotoHunt/images/miamib.jpg",
-      timerLength: 20000
-      }
     ]
 
   var score;  // player's score
