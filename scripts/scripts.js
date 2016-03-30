@@ -14,6 +14,16 @@ console.log("welcome to photohunt");
       },
       {
       level: "two",
+      xcoords: [220, 355, 42, 196],
+      ycoords: [405, 315, 208, 8],
+      circleWidth: [40,80,40,50],
+      circleHeight: [40,80,40,50],
+      imageA: "../PhotoHunt/images/taja.jpg",
+      imageB: "../PhotoHunt/images/tajb.jpg",
+      timerLength: 20000
+      },
+      {
+      level: "three",
       xcoords: [245, 355, 20, 110],
       ycoords: [215, 63, 360, 73],
       circleWidth: [60,50,70,40],
@@ -23,17 +33,17 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "three",
-      xcoords: [82, 303, 230, 210],
-      ycoords: [258, 236, 255, 142],
-      circleWidth: [30,30,30,40],
-      circleHeight: [30,30,30,40],
+      level: "four",
+      xcoords: [78, 298, 225, 205],
+      ycoords: [253, 231, 250, 138],
+      circleWidth: [40,40,40,50],
+      circleHeight: [40,40,40,50],
       imageA: "../PhotoHunt/images/generalassemblya.jpg",
       imageB: "../PhotoHunt/images/generalassemblyb.jpg",
       timerLength: 20000
       },
       {
-      level: "four",
+      level: "five",
       xcoords: [3, 25, 225, 400],
       ycoords: [185, 65, 250, 408],
       circleWidth: [80,90,100,50],
@@ -43,7 +53,7 @@ console.log("welcome to photohunt");
       timerLength: 20000
       },
       {
-      level: "five",
+      level: "six",
       xcoords: [50, 355, 181, 23],
       ycoords: [336, 198, 332, 13],
       circleWidth: [50,35,30,50],
@@ -78,6 +88,7 @@ console.log("welcome to photohunt");
   // When user is ready, the game begins at level 1
   photoHunt.startGame = function(level){
     $('#start-screen').remove();
+    $('body').css('overflow','auto');
     $('footer').css('visibility', 'visible');
     $('nav').css('visibility', 'visible');
     $('.container').css('visibility', 'visible');
@@ -325,6 +336,7 @@ photoHunt.giveHint = function(){
 
 // set the timer for each level
 photoHunt.setTimer = function (level){
+  $('#timer').css('border', 'solid black');
   var timeLength = photoHunt[level].timerLength;
   $("#timer").circletimer({
     timeout: timeLength,
@@ -340,9 +352,8 @@ photoHunt.setTimer = function (level){
       // when time is running out, blick border...
       if ((timeRemaining < 5000) && (timeRemaining > 4980)){
         console.log("time is running out!");
-        setInterval(function(){
-          $('#timer').toggleClass('timer-blink-black');}, 500);
-      }
+          $('#timer').css('border', 'solid red');
+        }
     })
   });
 }
