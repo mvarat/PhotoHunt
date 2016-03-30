@@ -33,11 +33,3 @@ The player should be able to:
 [Timer plugin used for circle timer](http://www.jqueryscript.net/time-clock/SVG-Based-Circular-Timer-Plugin-For-jQuery-Circle-Timer.html)
 
 [CSS Modals using sweetalert ](http://t4t5.github.io/sweetalert/)
-
-### Wins ###
-
-I got the MVP working quickly so I was able to spend time adding features like giving hints and using the time remaining to add to the players score.
-
-### Challenges ###
-
-Making the game look good on mobile.
