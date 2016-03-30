@@ -1,4 +1,3 @@
-
 # Photo Hunt #
 
 #### Photo Hunt is a 10-level spot the difference game based on the popular touch-screen game commonly found in bars.
