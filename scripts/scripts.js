@@ -65,7 +65,7 @@ console.log("welcome to photohunt");
     ]
 
   var score;  // player's score
-  var gameLevel = 0;  // this is game level that has been completed, add one for actual game level
+  var gameLevel = 0;  // this is game level that has been completed and place in the photoHunt array, add one for actual game level
   var clickCounts = 0; // number of times the player has clicked on an image, resets at each level
   var correctClickCounts = 0; // number of times the player has clicked on a difference, resets at each level
   var clickDifference = 0;  // determines whether or not the click was a success (0 for correct click, 1 for incorrect click)
@@ -138,8 +138,7 @@ photoHunt.updateScore = function(score){
 
 // updates the level in the footer
 photoHunt.setLevel = function(level){
-  var displayLevel = level + 1;
-  $('#level').text("Level: " + displayLevel);
+  $('#level').text("Level: " + (level + 1));
 };
 
 // sets if spot is clicked to false for new level
@@ -263,11 +262,11 @@ photoHunt.updateTracker = function(){
   }
   // when all differences have been clicked, level is completed
   else if (correctClickCounts == 4){
-    gameLevel ++;
     $('.tracker-d').css("background","#F433FF");
     $("#timer").circletimer("pause");
     score = score + parseInt(timeRemaining/100);  //increase score by remaining time
     this.updateScore(score);
+    gameLevel ++;
     // if all levels have been completed, dispay final score, ask user to play again
     if (gameLevel === this.length){
       swal({
