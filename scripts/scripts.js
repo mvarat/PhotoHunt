@@ -341,7 +341,7 @@ photoHunt.setHintClickHandler = function(){
     }
     else if (hintsLeft == 1){
       $('.hint-a').remove();
-      $('#hint-text').text("YOU ARE ON YOUR OWN");
+      $('#hint-text').text("YOU ARE ON YOUR OWN!");
     }
     scope.giveHint();
     hintsLeft--;
@@ -401,6 +401,7 @@ photoHunt.setTimer = function (level){
 photoHunt.startTimer = function(){
   $("#timer").circletimer("start");
 }
+
 
 
 
