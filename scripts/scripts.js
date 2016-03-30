@@ -3,10 +3,10 @@ console.log("welcome to photohunt");
   var photoHunt = [
       {
       level: "one",
-      xcoords: [92, 410, 160, 230],
-      ycoords: [375, 190, 265, 139],
-      circleWidth: [40,40,70,40],
-      circleHeight: [40,40,70,40],
+      xcoords: [90, 400, 160, 225],
+      ycoords: [370, 185, 265, 134],
+      circleWidth: [50,50,70,50],
+      circleHeight: [50,50,70,50],
       imageA: "../PhotoHunt/images/owla.jpg",
       imageB: "../PhotoHunt/images/owlb.jpg",
       timerLength: 20000
@@ -94,6 +94,7 @@ console.log("welcome to photohunt");
 
   // When user completes one level, next level begins
   photoHunt.startNextLevel = function(level){
+    photoHunt.setIsClicked();
     photoHunt.setImages(level);
     photoHunt.clearForNextLevel();
     photoHunt.generateHiddenSpots(level);
@@ -101,7 +102,6 @@ console.log("welcome to photohunt");
     photoHunt.setTimer(level);
     photoHunt.startTimer();
     photoHunt.setLevel(level);
-    photoHunt.setIsClicked();
   }
 
   photoHunt.clearForNextLevel = function(){
@@ -130,12 +130,10 @@ photoHunt.setLevel = function(level){
 };
 
 photoHunt.setIsClicked = function(){
-  console.log("When set is called first, a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
-  var aIsClicked = false;
-  var bIsClicked = false;
-  var cIsClicked = false;
-  var dIsClicked = false;
-  console.log("When set is called after, a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
+  aIsClicked = false;
+  bIsClicked = false;
+  cIsClicked = false;
+  dIsClicked = false;
 }
 
 // sets image A and B for specified level
@@ -292,14 +290,12 @@ photoHunt.setHintClickHandler = function(){
       }
     scope.giveHint();
     hintsLeft--;
-    console.log("hints left: " + hintsLeft)
     scope.updateTracker();
   });
 }
 
 // sets up hints in footer (3 per game)
 photoHunt.giveHint = function(){
-  console.log("a" + aIsClicked + " b "+ bIsClicked+ " c "+ cIsClicked+ " d "+ dIsClicked);
    if (aIsClicked == false){
       aIsClicked = true;
       $('.circle-a').css("border", "solid #32d0ec");
