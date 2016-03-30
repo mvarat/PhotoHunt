@@ -75,39 +75,39 @@ console.log("welcome to photohunt");
     });
   }
 
-  // When user is ready, the game begins
+  // When user is ready, the game begins at level 1
   photoHunt.startGame = function(level){
-    this.setScore();
     $('#start-screen').remove();
     $('footer').css('visibility', 'visible');
     $('nav').css('visibility', 'visible');
     $('.container').css('visibility', 'visible');
-    this.setScore();
-    this.setImages(level);
-    this.setImageClickHandler();
-    this.generateHiddenSpots(level);
-    this.setTracker();
-    this.setTimer(level);
-    this.startTimer();
-    this.setLevel(level);
-    this.setHintClickHandler();
+    this.setScore();  // sets score to 0
+    this.setImages(level);  // loads images for level 1
+    this.setImageClickHandler();  // sets click handler on images
+    this.generateHiddenSpots(level);  // generates hidden spots for level 1
+    this.setTracker();  // loads tracker in the footer
+    this.setTimer(level);  // sets timer for level 1
+    this.startTimer();  // starts timer
+    this.setLevel(level);  // sets level number in footer
+    this.setHintClickHandler();  // sets hints available in footer
   }
 
-  // When user completes one level, next level begins
+  // When user completes level, next level begins
   photoHunt.startNextLevel = function(level){
-    this.setIsClicked();
-    this.setImages(level);
-    this.clearForNextLevel();
-    this.generateHiddenSpots(level);
-    this.setTracker();
-    this.setTimer(level);
-    this.startTimer();
-    this.setLevel(level);
+    this.clearForNextLevel();  // clear previous level variables
+    this.setImages(level);  // set images for next level
+    this.generateHiddenSpots(level);  // generate hidden spots for next level
+    this.setTracker();  // reset tracker for level
+    this.setTimer(level);  // reset timer for level
+    this.startTimer();  // start timer
+    this.setLevel(level);  // sets level number in footer
   }
 
+  // before next level starts, clear previous level variables
   photoHunt.clearForNextLevel = function(){
     this.clearTracker();
     this.clearHiddenSpots();
+    this.setIsClicked();
     clickCounts = 0;
     correctClickCounts = 0;
     clickDifference = 0;
@@ -119,6 +119,7 @@ photoHunt.setScore = function(){
   score = 0;
   this.updateScore(score);
 };
+
 // updates the score in the footer
 photoHunt.updateScore = function(score){
   $('#score').text("Score: " + score);
@@ -130,6 +131,7 @@ photoHunt.setLevel = function(level){
   $('#level').text("Level: " + displayLevel);
 };
 
+// sets if spot is clicked to false for new level
 photoHunt.setIsClicked = function(){
   aIsClicked = false;
   bIsClicked = false;
@@ -143,7 +145,7 @@ photoHunt.setImages = function(level){
   $('.photo-b').css("background-image", 'url(' + photoHunt[level].imageB  + ')');
 };
 
-// generates circles with different classes
+// generates hidden circles with different classes for the level
 photoHunt.generateHiddenSpots = function(level){
     var xcoords = photoHunt[level].xcoords;
     var ycoords = photoHunt[level].ycoords;
@@ -167,7 +169,7 @@ photoHunt.setImageClickHandler = function(){
   $('.photo').click(function(e){
     clickCounts++;
     incorrectClick = clickCounts - correctClickCounts; // is 0 if click was correct, is 1 if click was incorrect
-    // if image was clicked but it was not a difference, decrease score by 15
+    // if image was clicked but it was not a difference, decrease score by 15, then make even again
     if (incorrectClick != 0){
       score = score - 15;
       scope.updateScore(score);
@@ -179,6 +181,7 @@ photoHunt.setImageClickHandler = function(){
 // when a difference is clicked, circle in blue
   // score is upated by 100 points
   // the difference on other image is circled and it can no longer be clicked
+  // is clicked is set to true so hint will not be given for that spot
 photoHunt.setCircleClickHandler = function(){
   var scope = this;
   $('.circle-a').click(function(e){
@@ -232,7 +235,7 @@ photoHunt.clearTracker = function(){
     $('.tracker').css("background","white");
 }
 
-// updates tracker in footer
+// updates tracker in footer, fills in next tracker spot when new difference is clicked
 photoHunt.updateTracker = function(){
   var scope = this;
   if (correctClickCounts < 1){
@@ -247,20 +250,22 @@ photoHunt.updateTracker = function(){
   else if (correctClickCounts < 4){
     $('.tracker-c').css("background","#7c32ec");
   }
-  // when all differences have been clicked,
+  // when all differences have been clicked, level is completed
   else if (correctClickCounts == 4){
     gameLevel ++;
     $('.tracker-d').css("background","#F433FF");
     $("#timer").circletimer("pause");
     score = score + parseInt(timeRemaining/100);  //increase score by remaining time
     this.updateScore(score);
-    if (gameLevel === 5){
+    // if all levels have been completed, dispay final score, ask user to play again
+    if (gameLevel === this.length){
       swal({
         title: "YOU WON!",
         text: "Your score is " + score + ". Do you want to play again?",
       }, function(){ window.location.reload();
                   });
     }
+    // ask player if they are ready to play the next level, then start next level
     else {
       swal({
         title: "CONGRATULATIONS!",
@@ -272,6 +277,7 @@ photoHunt.updateTracker = function(){
 }
 
 // sets up hints in footer (3 per game)
+// when hint is clicked, remove hint and give a circle away
 photoHunt.setHintClickHandler = function(){
   var scope = this;
   $('.hint').click(function(e){
@@ -293,7 +299,7 @@ photoHunt.setHintClickHandler = function(){
   });
 }
 
-// sets up hints in footer (3 per game)
+// finds a difference which has not been clicked and shows it to the player
 photoHunt.giveHint = function(){
    if (aIsClicked == false){
       aIsClicked = true;
@@ -331,10 +337,11 @@ photoHunt.setTimer = function (level){
     }),
     onUpdate: (function(elapsed) {
       timeRemaining = timeLength - (Math.round(elapsed));
+      // when time is running out, blick border...
       if ((timeRemaining < 5000) && (timeRemaining > 4980)){
         console.log("time is running out!");
-      //  setInterval(function(){
-      //    $('#timer').toggleClass('timer-blink-black');}, 500);
+        setInterval(function(){
+          $('#timer').toggleClass('timer-blink-black');}, 500);
       }
     })
   });
