@@ -1,5 +1,6 @@
 console.log("welcome to photohunt");
 
+  // sets the levels for the game
   var photoHunt = [
       {
       level: "one",
@@ -53,20 +54,20 @@ console.log("welcome to photohunt");
       }
     ]
 
-  var score;
-  var gameLevel = 0;
-  var clickCounts = 0;
-  var correctClickCounts = 0;
-  var clickDifference = 0;
-  var timeRemaining;
-  var hintsLeft = 3;
+  var score;  // player's score
+  var gameLevel = 0;  // this is game level that has been completed, add one for actual game level
+  var clickCounts = 0; // number of times the player has clicked on an image, resets at each level
+  var correctClickCounts = 0; // number of times the player has clicked on a difference, resets at each level
+  var clickDifference = 0;  // determines whether or not the click was a success (0 for correct click, 1 for incorrect click)
+  var timeRemaining;  // time remaining on the clock for each level
+  var hintsLeft = 3;  // number of hints left for the entire game
 
-  var aIsClicked = false;
-  var bIsClicked = false;
-  var cIsClicked = false;
-  var dIsClicked = false;
+  var aIsClicked = false;  // if difference a is clicked will be true
+  var bIsClicked = false;  // if difference b is clicked will be true
+  var cIsClicked = false;  // if difference d is clicked will be true
+  var dIsClicked = false;  // if difference d is clicked will be true
 
-  // Initialize the Game
+  // Initialize the game, displays start screen, when clicked, start game at level 1
   photoHunt.initGame = function(){
     var scope = this;
     $('#start-screen').click(function(e){
@@ -76,37 +77,37 @@ console.log("welcome to photohunt");
 
   // When user is ready, the game begins
   photoHunt.startGame = function(level){
-    photoHunt.setScore();
+    this.setScore();
     $('#start-screen').remove();
     $('footer').css('visibility', 'visible');
     $('nav').css('visibility', 'visible');
     $('.container').css('visibility', 'visible');
-    photoHunt.setScore();
-    photoHunt.setImages(level);
-    photoHunt.setImageClickHandler();
-    photoHunt.generateHiddenSpots(level);
-    photoHunt.setTracker();
-    photoHunt.setTimer(level);
-    photoHunt.startTimer();
-    photoHunt.setLevel(level);
-    photoHunt.setHintClickHandler();
+    this.setScore();
+    this.setImages(level);
+    this.setImageClickHandler();
+    this.generateHiddenSpots(level);
+    this.setTracker();
+    this.setTimer(level);
+    this.startTimer();
+    this.setLevel(level);
+    this.setHintClickHandler();
   }
 
   // When user completes one level, next level begins
   photoHunt.startNextLevel = function(level){
-    photoHunt.setIsClicked();
-    photoHunt.setImages(level);
-    photoHunt.clearForNextLevel();
-    photoHunt.generateHiddenSpots(level);
-    photoHunt.setTracker();
-    photoHunt.setTimer(level);
-    photoHunt.startTimer();
-    photoHunt.setLevel(level);
+    this.setIsClicked();
+    this.setImages(level);
+    this.clearForNextLevel();
+    this.generateHiddenSpots(level);
+    this.setTracker();
+    this.setTimer(level);
+    this.startTimer();
+    this.setLevel(level);
   }
 
   photoHunt.clearForNextLevel = function(){
-    photoHunt.clearTracker();
-    photoHunt.clearHiddenSpots();
+    this.clearTracker();
+    this.clearHiddenSpots();
     clickCounts = 0;
     correctClickCounts = 0;
     clickDifference = 0;
@@ -284,10 +285,8 @@ photoHunt.setHintClickHandler = function(){
     }
     else if (hintsLeft == 1){
       $('.hint-a').remove();
+      $('#hint-text').text("YOU ARE ON YOUR OWN");
     }
-    else if (hintsLeft == 0){
-        $('h5').text("No More Hints");
-      }
     scope.giveHint();
     hintsLeft--;
     scope.updateTracker();
