@@ -311,7 +311,7 @@ photoHunt.updateTracker = function(){
     if (gameLevel === this.length){
       swal({
         title: "YOU WON!",
-        text: "Your score is " + score + ". Do you want to play again?",
+        text: "Your score is " + score + ". Think you can do better?",
       }, function(){ window.location.reload();
                   });
     }
