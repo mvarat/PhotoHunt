@@ -10,7 +10,7 @@ console.log("welcome to photohunt");
       circleHeight: [50,50,70,50],
       imageA: "../PhotoHunt/images/owla.jpg",
       imageB: "../PhotoHunt/images/owlb.jpg",
-      timerLength: 20000
+      timerLength: 60000
       },
       {
       level: "two",
@@ -20,7 +20,7 @@ console.log("welcome to photohunt");
       circleHeight: [40,40,80,100],
       imageA: "../PhotoHunt/images/arta.jpg",
       imageB: "../PhotoHunt/images/artb.jpg",
-      timerLength: 200000
+      timerLength: 55000
       },
       {
       level: "three",
@@ -30,7 +30,7 @@ console.log("welcome to photohunt");
       circleHeight: [40,80,40,50],
       imageA: "../PhotoHunt/images/taja.jpg",
       imageB: "../PhotoHunt/images/tajb.jpg",
-      timerLength: 20000
+      timerLength: 50000
       },
       {
       level: "four",
@@ -40,7 +40,7 @@ console.log("welcome to photohunt");
       circleHeight: [60,50,70,40],
       imageA: "../PhotoHunt/images/arcadea.jpg",
       imageB: "../PhotoHunt/images/arcadeb.jpg",
-      timerLength: 20000
+      timerLength: 45000
       },
       {
       level: "five",
@@ -50,7 +50,7 @@ console.log("welcome to photohunt");
       circleHeight: [40,50,40,70],
       imageA: "../PhotoHunt/images/brooklyna.jpg",
       imageB: "../PhotoHunt/images/brooklynb.jpg",
-      timerLength: 20000
+      timerLength: 40000
       },
       {
       level: "six",
@@ -60,7 +60,7 @@ console.log("welcome to photohunt");
       circleHeight: [40,40,40,50],
       imageA: "../PhotoHunt/images/generalassemblya.jpg",
       imageB: "../PhotoHunt/images/generalassemblyb.jpg",
-      timerLength: 20000
+      timerLength: 35000
       },
       {
       level: "seven",
@@ -70,7 +70,7 @@ console.log("welcome to photohunt");
       circleHeight: [40,40,50,50],
       imageA: "../PhotoHunt/images/crybabya.jpg",
       imageB: "../PhotoHunt/images/crybabyb.jpg",
-      timerLength: 200000
+      timerLength: 30000
       },
       {
       level: "eight",
@@ -80,7 +80,7 @@ console.log("welcome to photohunt");
       circleHeight: [60,60,80,50],
       imageA: "../PhotoHunt/images/concerta.jpg",
       imageB: "../PhotoHunt/images/concertb.jpg",
-      timerLength: 20000
+      timerLength: 25000
       },
       {
       level: "nine",
@@ -100,7 +100,7 @@ console.log("welcome to photohunt");
       circleHeight: [80,90,100,50],
       imageA: "../PhotoHunt/images/tacoa.jpg",
       imageB: "../PhotoHunt/images/tacob.jpg",
-      timerLength: 20000
+      timerLength: 15000
       },
     ]
 
